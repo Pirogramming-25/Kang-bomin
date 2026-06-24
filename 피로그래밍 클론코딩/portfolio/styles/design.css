@@ -1,0 +1,350 @@
+header{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 25px 80px;
+    padding-bottom: 0;
+    background-color: black;
+}
+
+.header-menu{
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 20px;
+}
+
+.header-menu h2{
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.header-menu h2:nth-child(3){
+    color: #92ec6a;
+}
+
+main{
+    background-color: black;
+    padding-bottom: 45px;
+}
+
+
+.generation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 29px 88px;
+    padding-bottom: 0;
+    color: white;
+}
+
+.generation p:nth-child(2){
+    font-size: 1.5rem;
+}
+
+.generation p:nth-child(3){
+    font-size: 1.1rem;
+
+}
+
+.projects{
+    width: calc(100% - 140px);
+    margin: 25px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+}
+
+.project-card{
+    display: flex;
+    flex-direction: row;
+
+    background-color: #333333;
+    border-radius: 10px;
+    width: 100%;
+    height: 145px;
+    padding: 17px;
+    transition: transform 0.1s ease;
+
+    position: relative;
+    
+}
+
+.project-card:hover{
+    transform: translateY(-2px);
+}
+
+.project-card .frame{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 13.5%;
+    height: 100%;
+    
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.project-card .frame img{
+    max-width: 80%;
+    max-height: 80%;
+    width: auto;
+    height: auto;
+    transition: transform 0.3s ease-out;
+}
+.project-card:hover .frame img{
+    transform: scale(1.1);
+}
+
+.project-items{
+    flex: 1;
+    margin: 2px 0 2px 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-items p:nth-child(1){
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 10px;
+}
+.project-items p:nth-child(2){
+    font-size: 1rem;
+    font-weight: 350;
+    letter-spacing: -0.6px;
+    color: rgba(255, 255, 255, 0.664);
+    margin-bottom: 26px;
+}
+
+.project-items .members{
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 11px;
+
+}
+
+.project-items .members p{
+    background-color: #898989;
+    color: black;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.5rem 0.5rem 0.5rem;
+    margin: 0;
+    line-height: 1;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+        
+
+.project-items .members p:nth-child(1){
+    background-color: #5286b1;
+    color: white;
+}
+
+.project-card .ham{
+    width: 20px;
+    height: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    margin-left: auto;
+    margin-top: 2px;
+    transition: transform 0.3s ease-out;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.project-card .ham span{
+    width: 100%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.664);
+    transition: transform 0.3s ease; 
+
+}
+
+.project-card .ham span:nth-child(1){
+    transform-origin: left center;
+
+}
+.project-card .ham span:nth-child(3){
+    transform-origin: right center;
+
+}
+.project-card:hover .ham span:nth-child(1){
+    transform: scaleX(0.5);
+}
+
+.project-card:hover .ham span:nth-child(3){
+    transform: scaleX(0.5);
+}
+
+footer{
+    background-color: #333333;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-items{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.footer-left{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    padding: 45px 80px;
+    padding-right: 0;
+}
+
+.footer-left .piro_bylaws{
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.footer-left .socials{
+    display: flex;
+    flex-direction: row;
+    gap: 10px
+    
+}
+
+.footer-left .socials a{
+    background-color: black;
+    padding: 7px 5px;
+    border-radius: 50%;
+}
+
+.footer-left .socials i{
+    color: white;
+    font-size: 1rem;
+}
+
+.footer-left .mail{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+
+.footer-left .mail a{
+    background-color: black;
+    padding: 7px 5px;
+    border-radius: 50%;
+}
+
+.footer-left .mail i{
+    color: white;
+    font-size: 1rem;
+}
+
+.footer-left .mail p{
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.footer-right{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-right .footer-menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-right .footer-menu p{
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 400;
+    
+    border-right: 1px solid rgba(255, 255, 255, 0.376);
+    padding: 0 20px;    
+    
+}
+
+.footer-right .footer-menu p:nth-last-child(1){
+    border: none;
+}
+
+footer .copyright{
+    background-color: #292929;
+}
+
+footer .copyright p{
+    color: rgba(255, 255, 255, 0.594);
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 1rem;
+}
+
+
+@media (max-width: 800px){
+    .header-menu{
+        display:none;
+    }
+}
+
+@media(max-width: 750px){
+    .footer-menu{
+        display: none;
+    }
+}
+
+@media (max-width: 650px){
+    header{
+        padding:20px;
+    }
+
+    .generation{
+        padding:20px;
+    }
+
+    .projects{
+        width:calc(100% - 40px);
+    }
+
+    .project-card{
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
+    .project-card .frame{
+        width: 50%;
+    }
+    .project-card .project-items{
+        align-items: center;
+    }
+    .project-card .members{
+        flex-flow: row wrap;
+
+    }
+    .footer-items{
+        flex-direction: column;
+        align-items: center;
+    }
+}
