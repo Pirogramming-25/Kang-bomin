@@ -1,0 +1,19 @@
+*{
+    box-sizing: border-box;
+}
+
+html, body, h1, h2, h3, h4, 
+p, div, header, footer, main,
+img, ul, li{
+    margin: 0;
+    padding: 0;
+    line-height: 1.0;
+    font-size: 1.0rem;
+    font-style: normal;
+    font-weight: normal;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+ul, li{
+    list-style: none;
+}

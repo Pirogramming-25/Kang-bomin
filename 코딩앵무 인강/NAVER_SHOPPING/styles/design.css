@@ -1,0 +1,90 @@
+#order_wrap{
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+#order_wrap .left{
+    width: 500px;
+}
+#order_wrap .left img{
+    width: 100%;
+}
+#order_wrap .right{
+    width: calc(100% - 550px);
+}
+#order_wrap .right .top h1{
+    font-size: 1.2rem;
+    padding: 20px 0;
+
+}
+#order_wrap .right .top > p:nth-child(2){
+    color: #aaa;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 10px;
+}
+#order_wrap .right .top dl{
+    display: flex;
+    /* 줄바꿈이 되니까 wrap */
+    flex-flow: row wrap;
+}
+#order_wrap .right .top dl dt{
+    width: 30%;
+}
+#order_wrap .right .top dl dd{
+    width: 70%;
+}
+#order_wrap .right .top dl dt, #order_wrap .right .top dl dd{
+    padding: 10px 0;
+}
+#order_wrap .right .top dl dd.price{
+    font-weight: 700;
+}
+#order_wrap .right .top .number{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin: 10px 0;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+#order_wrap .right .top .number .order_number input[name=num]{
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+#order_wrap .right .top .total_price{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+#order_wrap .right .top .total_price .result_price{
+    color: #cc0202;
+    font-size: 1.2rem;
+}
+#order_wrap .right .bottom{
+    text-align: right;
+    padding: 20px 0;
+}
+#order_wrap .right .bottom button{
+    padding: 10px 0;
+}
+#order_wrap .right .bottom #order_btn{
+    background-color: #cc0202;
+    color: white;
+    width: 150px;
+}
+#order_wrap .right .bottom #cart_btn{
+    background-color: #a9a9a9;
+    color: white;
+    width: 120px;
+}
+#order_wrap .right .bottom #like_btn{
+    background-color: #ddd;
+    width: 100px;
+}
