@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: #222;
+    background: white;
+}
+
+.home-link {
+    display: inline-block;
+    text-decoration: none;
+    color: gray;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.home-link:hover {
+    text-decoration: underline;
+}
+
+.poster {
+    width: 200px;
+    border-radius: 10px;
+    margin: 12px 0 20px;
+    display: block;
+}
+
+h1 {
+    font-size: 26px;
+    margin: 4px 0 16px;
+}
+
+.meta {
+    color: gray;
+    line-height: 2;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.meta span {
+    display: inline-block;
+    margin-right: 18px;
+}
+
+.content {
+    white-space: pre-line;
+    line-height: 1.7;
+    margin: 24px 0;
+    padding: 18px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+.actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 8px;
+}
+
+.actions a, .actions button {
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.edit-btn {
+    background: green;
+    color: white;
+}
+
+.edit-btn:hover {
+    background: green;
+}
+
+.delete-btn {
+    background: orange;
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background: orange;
+}
+
+form.inline {
+    display: inline;
+}
