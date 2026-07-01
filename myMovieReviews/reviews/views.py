@@ -1,12 +1,26 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Review
 
+def format_time(minutes):
+    hours = minutes // 60
+    mins =  minutes % 60
+
+    if hours > 0 and mins > 0:
+        return f"{hours}시간 {mins}분"
+    elif hours > 0:
+        return f"{hours}시간"
+    else:
+        return f"{mins}분"
+    
 def review_list(request):
     reviews = Review.objects.all().order_by('-created_at')
+    for review in reviews:
+        review.running_time_display = format_time(review.running_time)
     return render(request, 'reviews/review_list.html', {'reviews': reviews})
 
 def review_detail(request, pk):
     review = get_object_or_404(Review, pk=pk)
+    review.running_time_display = format_time(review.running_time)
     return render(request, 'reviews/review_detail.html', {'review': review})
 
 def review_create(request):
@@ -47,3 +61,4 @@ def review_delete(request, pk):
         review.delete()
         return redirect('review_list')
     return redirect('review_detail', pk=pk)
+
