@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>My Movie Reviews</title>
+    <link rel="stylesheet" href="{% static 'reviews/review_list.css' %}">
+</head>
+<body>
+    <div class="topbar">
+        <a class="logo" href="{% url 'review_list' %}">my <span>Movie</span>reviews</a>
+        <a class="write-btn" href="{% url 'review_create' %}">Add a New review</a>
+    </div>
+
+    {% if reviews %}
+    <div class="card-grid">
+        {% for review in reviews %}
+        <a class="card" href="{% url 'review_detail' review.pk %}">
+            <div class="poster">
+                {% if review.poster %}
+                <img src="{{ review.poster.url }}" alt="{{ review.title }}">
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <h3>{{ review.title }}</h3>
+                <p>개봉년도: {{ review.year }}년</p>
+                <p>장르: {{ review.genre }}</p>
+                <p>평점: {{ review.score }}</p>
+                <p>러닝타임: {{ review.running_time_display }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty">작성된 리뷰가 없습니다.</p>
+    {% endif %}
+</body>
+</html>

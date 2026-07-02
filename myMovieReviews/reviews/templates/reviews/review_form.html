@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if review %}리뷰 수정{% else %}리뷰 작성{% endif %} My Movie Reviews</title>
+    <link rel="stylesheet" href="{% static 'reviews/review_form.css' %}">
+</head>
+<body>
+    <a class="home-link" href="{% url 'review_list' %}">← My Movie Reviews</a>
+
+    <h1>{% if review %}리뷰 수정{% else %}리뷰 작성{% endif %}</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="poster">포스터 이미지</label>
+        {% if review.poster %}
+        <img class="poster-preview" src="{{ review.poster.url }}" alt="현재 포스터">
+        {% endif %}
+        <input type="file" id="poster" name="poster" accept="image/*">
+
+        <label for="title">영화 제목</label>
+        <input type="text" id="title" name="title" value="{{ review.title|default:'' }}" required>
+
+        <label for="director">감독</label>
+        <input type="text" id="director" name="director" value="{{ review.director|default:'' }}" required>
+
+        <label for="actor">주연</label>
+        <input type="text" id="actor" name="actor" value="{{ review.actor|default:'' }}" required>
+
+        <label for="genre">장르</label>
+        <input type="text" id="genre" name="genre" value="{{ review.genre|default:'' }}" required>
+
+        <label for="year">개봉 년도</label>
+        <input type="number" id="year" name="year" value="{{ review.year|default:'' }}" required>
+
+        <label for="running_time">러닝타임 (분)</label>
+        <input type="number" id="running_time" name="running_time" value="{{ review.running_time|default:'' }}" required>
+
+        <label for="score">별점 (1~5)</label>
+        <input type="number" id="score" name="score" min="1" max="5" value="{{ review.score|default:'' }}" required>
+
+        <label for="content">리뷰 내용</label>
+        <textarea id="content" name="content" required>{{ review.content|default:'' }}</textarea>
+
+        <button class="save-btn" type="submit">저장</button>
+    </form>
+</body>
+</html>

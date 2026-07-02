@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ review.title }} - My Movie Reviews</title>
+    <link rel="stylesheet" href="{% static 'reviews/review_detail.css' %}">
+</head>
+<body>
+    <a class="home-link" href="{% url 'review_list' %}">← My Movie Reviews</a>
+
+    {% if review.poster %}
+    <img class="poster" src="{{ review.poster.url }}" alt="{{ review.title }}">
+    {% endif %}
+
+    <h1>{{ review.title }} ({{ review.year }})</h1>
+    <div class="meta">
+        <span>감독: {{ review.director }}</span>
+        <span>주연: {{ review.actor }}</span>
+        <span>장르: {{ review.genre }}</span>
+        <span>별점: ⭐ {{ review.score }}</span>
+        <span>러닝타임: {{ review.running_time_display }}분</span>
+    </div>
+
+    <div class="content">{{ review.content }}</div>
+
+    <div class="actions">
+        <a class="edit-btn" href="{% url 'review_update' review.pk %}">수정</a>
+        <form class="inline" action="{% url 'review_delete' review.pk %}" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+            {% csrf_token %}
+            <button class="delete-btn" type="submit">삭제</button>
+        </form>
+    </div>
+</body>
+</html>
