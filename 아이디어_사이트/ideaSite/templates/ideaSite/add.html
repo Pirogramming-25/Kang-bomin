@@ -8,7 +8,7 @@
         {% csrf_token %}
 
         <p>제목: <input type = 'text' name = 'title' required></p>
-        <p>이미지: <input type = 'file' name = 'image' accept = 'image/' required></p>
+        <p>이미지: <input type = 'file' name = 'image' accept = 'image/*' required></p>
         <p>내용: <textarea name = 'content' required></textarea>
         <p>관심도: <input type = 'number' name = 'interest' value = '0'></p>
         <p>개발툴:

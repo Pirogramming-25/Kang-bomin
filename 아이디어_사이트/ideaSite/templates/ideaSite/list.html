@@ -4,6 +4,15 @@
 
 {% block content %}
     <h1>아이디어</h1>
+    <form method="GET">
+        <select name="sort" onchange="this.form.submit()">
+            <option value="recent" {% if sort == 'recent' %}selected{% endif %}>최신순</option>
+            <option value="old" {% if sort == 'old' %}selected{% endif %}>등록순</option>
+            <option value="name" {% if sort == 'name' %}selected{% endif %}>이름순</option>
+            <option value="interest" {% if sort == 'interest' %}selected{% endif %}>관심도순</option>
+            <option value="star" {% if sort == 'star' %}selected{% endif %}>찜하기순</option>
+        </select>
+    </form>
     <a href = "{% url 'add' %}">아이디어를 등록하세요.</a>
 
     {% for idea in ideas %}

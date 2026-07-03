@@ -1,8 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Idea, DevTool, IdeaStar
+from django.db.models import Count
 
 def list(request):
-    ideas = Idea.objects.order_by('-created_at')
+    sort = request.GET.get('sort', 'recent')
+    
+    if sort == 'name':
+        ideas = Idea.objects.order_by('title')
+    elif sort == 'old':
+        ideas = Idea.objects.order_by('created_at')
+    elif sort == 'interest':
+        ideas = Idea.objects.order_by('-interest')
+    elif sort == 'star':
+        ideas = Idea.objects.annotate(star_count = Count('stars')).order_by('-star_count')
+    else:
+        ideas = Idea.objects.order_by('-created_at')
     return render(request, 'ideaSite/list.html', {'ideas': ideas})
 
 def add(request):
