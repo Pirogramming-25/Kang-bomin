@@ -4,13 +4,16 @@
 
 {% block content %}
 
-    <h1>개발툴 등록</h1>
-    <form method = 'POST'>
+    <h1>Devtool Add</h1>
+    <form method = 'POST' class="add-form">
         {% csrf_token %}
         <p>이름: <input type = 'text' name = 'name' required></p>
         <p>종류: <input type = 'text' name = 'kind' required></p>
         <p>내용: <textarea name = 'content' required></textarea>
-        <button type = "submit">등록</button>
+    
+        <div class="form-buttons">
+            <button type="submit">등록</button>
+            <a href="{% url 'toolList' %}"><button type="button" class="btn-gray">취소</button></a>
+        </div>
     </form>
-    <a href="{% url 'toolList' %}"><button>개발툴 목록으로</button></a>
 {% endblock %}

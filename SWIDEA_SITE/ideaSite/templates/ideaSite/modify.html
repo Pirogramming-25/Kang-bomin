@@ -4,8 +4,8 @@
 
 {% block content %}
 
-<h1>아이디어 수정</h1>
-<form method = 'POST' enctype="multipart/form-data">
+<h1>Idea Modify</h1>
+<form method = 'POST' enctype="multipart/form-data" class="add-form">
     {% csrf_token %}
     
     <p>제목: <input type = 'text' name = 'title' value = '{{ idea.title }}' required></p>
@@ -23,7 +23,9 @@
                     {% endfor %}
             </select>
         </p>
-        <button type = "submit">완료</button>
+        <div class="form-buttons">
+            <button type="submit">수정 완료</button>
+            <a href="{% url 'detail' idea.id %}"><button type="button" class="btn-gray">취소</button></a>
+        </div>
     </form>
-    <a href="{% url 'detail' idea.id %}"><button>취소</button></a>
 {% endblock %}

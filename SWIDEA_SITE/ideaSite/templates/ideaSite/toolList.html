@@ -4,15 +4,17 @@
 
 {% block content %}
 
-    <h1>DevTool list</h1>
-    <a href = "{% url 'toolAdd' %}">개발툴을 등록하세요.</a>
+<h1>Devtool</h1>
 
+<div class="tool-list">
     {% for devtool in devtools %}
-        <div>
+        <div class="tool-item">
             <h3><a href="{% url 'toolDetail' devtool.id %}">{{ devtool.name }}</a></h3>
-            <p>{{ devtool.kind }}</p>
+            <span class="tool-kind">{{ devtool.kind }}</span>
+            <span class="tool-content">{{ devtool.content|truncatechars:40 }}</span>
         </div>
     {% empty %}
         <p>등록된 개발툴이 없습니다.</p>
     {% endfor %}
+</div>
 {% endblock %}
