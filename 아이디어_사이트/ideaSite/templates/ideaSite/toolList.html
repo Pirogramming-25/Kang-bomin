@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}개발툴 리스트{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+    <h1>DevTool list</h1>
+    <a href = "{% url 'toolAdd' %}">개발툴을 등록하세요.</a>
+
+    {% for devtool in devtools %}
+        <div>
+            <h3><a href="{% url 'toolDetail' devtool.id %}">{{ devtool.name }}</a></h3>
+            <p>{{ devtool.kind }}</p>
+        </div>
+    {% empty %}
+        <p>등록된 개발툴이 없습니다.</p>
+    {% endfor %}
+{% endblock %}

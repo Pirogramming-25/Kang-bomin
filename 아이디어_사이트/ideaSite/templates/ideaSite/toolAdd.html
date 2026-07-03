@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}개발툴 등록{% endblock %}
+
+{% block content %}
+
+    <h1>개발툴 등록</h1>
+        {% csrf_token %}
+
+        <p>이름: <input type = 'text' name = 'name' required></p>
+        <p>종류: <input type = 'text' name = 'kind' required></p>
+        <p>내용: <textarea name = 'content' required></textarea>
+        <button type = "submit">등록</button>
+    </form>
+    <a href="{% url 'toolList' %}"><button>개발툴 목록으로</button></a>
+{% endblock %}

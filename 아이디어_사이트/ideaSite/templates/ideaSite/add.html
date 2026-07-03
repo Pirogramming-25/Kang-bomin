@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}아이디어 등록{% endblock %}
+
+{% block content %}
+    <h1>아이디어 등록</h1>
+    <form method = 'POST' enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <p>제목: <input type = 'text' name = 'title' required></p>
+        <p>이미지: <input type = 'file' name = 'image' accept = 'image/' required></p>
+        <p>내용: <textarea name = 'content' required></textarea>
+        <p>관심도: <input type = 'number' name = 'interest' value = '0'></p>
+        <p>개발툴:
+            <select name = 'devtool' required>
+                {% for devtool in devtools %}
+                    <option value = "{{ devtool.id}}">{{ devtool.name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <button type = "submit">등록</button>
+    </form>
+    <a href="{% url 'list' %}"><button>아이디어 목록으로</button></a>
+{% endblock %}
