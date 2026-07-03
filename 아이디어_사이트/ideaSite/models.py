@@ -27,12 +27,8 @@ class Idea(models.Model):
         return self.title
     
 class IdeaStar(models.Model):
-    idea = models.ForeignKey(
+    idea = models.OneToOneField(
         Idea,
         on_delete = models.CASCADE,
-        related_name = 'stars'
+        related_name = 'star'
     )
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ('idea', 'user')

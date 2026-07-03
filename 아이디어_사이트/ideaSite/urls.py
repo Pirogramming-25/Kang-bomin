@@ -12,4 +12,6 @@ urlpatterns = [
     path("toolDetail/<int:id>/", views.toolDetail, name='toolDetail'),
     path("toolModify/<int:id>/", views.toolModify, name='toolModify'),
     path("toolDelete/<int:id>/", views.toolDelete, name='toolDelete'),
+    path("interest/<int:id>/", views.interest_update, name='interest_update'),
+    path("star/<int:id>/", views.star_toggle, name='star_toggle'),
 ]

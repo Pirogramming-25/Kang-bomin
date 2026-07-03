@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Idea, DevTool, IdeaStar
 from django.db.models import Count
+import json
+from django.http import JsonResponse
 
 def list(request):
     sort = request.GET.get('sort', 'recent')
@@ -12,10 +14,10 @@ def list(request):
     elif sort == 'interest':
         ideas = Idea.objects.order_by('-interest')
     elif sort == 'star':
-        ideas = Idea.objects.annotate(star_count = Count('stars')).order_by('-star_count')
+        ideas = Idea.objects.annotate(star_count = Count('star')).order_by('-star_count')
     else:
         ideas = Idea.objects.order_by('-created_at')
-    return render(request, 'ideaSite/list.html', {'ideas': ideas})
+    return render(request, 'ideaSite/list.html', {'ideas': ideas, 'sort': sort})
 
 def add(request):
     if request.method == 'POST':
@@ -87,3 +89,28 @@ def toolDelete(request, id):
     devtool = get_object_or_404(DevTool, id = id)
     devtool.delete()
     return redirect('toolList')
+
+def interest_update(request, id):
+    if request.method == 'POST':
+        idea = get_object_or_404(Idea, id = id)
+        data = json.loads(request.body)
+        if data['action'] == 'plus':
+            idea.interest += 1
+        elif data['action'] == 'minus':
+            idea.interest -= 1
+        idea.save()
+        return JsonResponse({'interest': idea.interest})
+    return JsonResponse({'error': 'POST only'}, status=405)
+
+def star_toggle(request, id):
+    if request.method == 'POST':
+        idea = get_object_or_404(Idea, id = id)
+        star = IdeaStar.objects.filter(idea = idea)
+        if star.exists():
+            star.delete()
+            starred = False
+        else:
+            IdeaStar.objects.create(idea = idea)
+            starred = True
+        return JsonResponse({'starred': starred})
+    return JsonResponse({'error': 'POST only'}, status=405)

@@ -19,9 +19,57 @@
         <div>
             <img src = "{{ idea.image.url}}" width = '200'>
             <h3><a href = "{% url 'detail' idea.id %}">{{ idea.title }}</a></h3>
-            <p>관심도: {{ idea.interest }}</p>
+            <p>
+                관심도:
+                <button class="interest-btn" data-id="{{ idea.id }}" data-action="minus">-</button>
+                <span id="interest-{{ idea.id }}">{{ idea.interest }}</span>
+                <button class="interest-btn" data-id="{{ idea.id }}" data-action="plus">+</button>
+            </p>
+            <span class="star-btn" data-id="{{ idea.id }}" id="star-{{ idea.id }}"
+            style="cursor:pointer; font-size:24px;">
+                {% if idea.star %}⭐{% else %}☆{% endif %}
+            </span>
         </div>
     {% empty %}
         <p>등록된 아이디어가 없습니다.</p>
     {% endfor %}
+    <script>
+    document.querySelectorAll('.interest-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const id = btn.dataset.id;
+            const action = btn.dataset.action;
+
+            fetch(`/interest/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: JSON.stringify({action: action}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById(`interest-${id}`).textContent = data.interest;
+            });
+        });
+    });
+
+    document.querySelectorAll('.star-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const id = btn.dataset.id;
+
+            fetch(`/star/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById(`star-${id}`).textContent = data.starred ? '⭐' : '☆';
+            });
+        });
+    });
+    </script>
 {% endblock %}
