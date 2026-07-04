@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}아이디어 리스트{% endblock %}
+
+{% block content %}
+<h1>Idea</h1>
+<form method="GET" class = "sort-form">
+    <select name = "sort" onchange = "this.form.submit()">
+        <option value = "recent" {% if sort == 'recent' %}selected{% endif %}>최신순</option>
+        <option value = "old" {% if sort == 'old' %}selected{% endif %}>등록순</option>
+        <option value = "name" {% if sort == 'name' %}selected{% endif %}>이름순</option>
+        <option value = "interest" {% if sort == 'interest' %}selected{% endif %}>관심도순</option>
+        <option value = "star" {% if sort == 'star' %}selected{% endif %}>찜하기순</option>
+    </select>
+</form>
+<div class="idea-list">
+    {% for idea in ideas %}
+    <div class="idea-card">
+        <img src="{{ idea.image.url}}" width='200'>
+        <h3><a href="{% url 'detail' idea.id %}">{{ idea.title }}</a></h3>
+        <p class="card-devtool">예상 개발 툴: {{ idea.devtool.name }}</p>
+        <p>
+            관심도:
+            <button class="interest-btn" data-id="{{ idea.id }}" data-action="minus">-</button>
+            <span id="interest-{{ idea.id }}">{{ idea.interest }}</span>
+            <button class="interest-btn" data-id="{{ idea.id }}" data-action="plus">+</button>
+        </p>
+        <span class="star-btn {% if idea.star %}starred{% endif %}" data-id="{{ idea.id }}" id="star-{{ idea.id }}">★</span>
+    </div>
+    {% empty %}
+        <p>등록된 아이디어가 없습니다.</p>
+    {% endfor %}
+</div>
+<script>
+    document.querySelectorAll('.interest-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const id = btn.dataset.id;
+            const action = btn.dataset.action;
+
+            fetch(`/interest/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                body: JSON.stringify({ action: action }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById(`interest-${id}`).textContent = data.interest;
+                });
+        });
+    });
+
+    document.querySelectorAll('.star-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const id = btn.dataset.id;
+
+            fetch(`/star/${id}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById(`star-${id}`).classList.toggle('starred', data.starred);
+                });
+        });
+    });
+</script>
+{% endblock %}

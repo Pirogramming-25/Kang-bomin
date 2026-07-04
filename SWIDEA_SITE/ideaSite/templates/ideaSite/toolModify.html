@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ devtool.name }}{% endblock %}
+
+{% block content %}
+
+    <h1>개발툴 수정</h1>
+    <form method = 'POST' class="add-form">
+        {% csrf_token %}
+
+        <p>이름: <input type = 'text' name = 'name' value = '{{ devtool.name }}' required></p>
+        <p>종류: <input type = 'text' name = 'kind' value = '{{ devtool.kind }}' required></p>
+        <p>내용: <textarea name = 'content' required>{{ devtool.content }}</textarea></p>
+        <div class="form-buttons">
+            <button type="submit">수정 완료</button>
+            <a href="{% url 'toolDetail' devtool.id %}"><button type="button" class="btn-gray">취소</button></a>
+        </div>
+    </form>
+
+{% endblock %}

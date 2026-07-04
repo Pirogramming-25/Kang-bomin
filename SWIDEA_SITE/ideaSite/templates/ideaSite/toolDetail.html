@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ devtool.name }}{% endblock %}
+
+{% block content %}
+
+<div class="detail-container">
+    <h1>{{ devtool.name }}</h1>
+
+    <div class="detail-info">
+        <p><span class="info-label">종류</span>{{ devtool.kind }}</p>
+        <p><span class="info-label">설명</span>{{ devtool.content }}</p>
+    </div>
+
+    <div class="detail-info">
+        <p class="idea-list-title">> 만들 수 있는 SW 목록</p>
+        {% for idea in devtool.ideas.all %}
+            <p><a href="{% url 'detail' idea.id %}">{{ idea.title }}</a></p>
+        {% empty %}
+            <p class="empty-text">사용하는 아이디어가 없습니다.</p>
+        {% endfor %}
+    </div>
+
+    <div class="detail-buttons">
+        <a href="{% url 'toolModify' devtool.id %}"><button>수정</button></a>
+        <a href="{% url 'toolDelete' devtool.id %}"><button class="btn-delete">삭제</button></a>
+        <a href="{% url 'toolList' %}"><button class="btn-gray">목록</button></a>
+    </div>
+</div>
+{% endblock %}

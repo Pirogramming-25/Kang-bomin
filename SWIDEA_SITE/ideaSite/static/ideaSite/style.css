@@ -1,0 +1,381 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+    margin: 0;
+    background-color: #eef1f5;
+    color: #2c3e50;
+}
+
+nav {
+    background-color: white;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    margin-right: 30px;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+nav a:first-child {
+    font-weight: bold;
+    font-size: 17px;
+    color: black;
+    margin-right: 50px;
+}
+
+nav a:hover {
+    color: royalblue;
+}
+
+main {
+    max-width: 1000px;
+    margin: 35px auto;
+    padding: 35px 40px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+h1 {
+    text-align: center;
+    margin: 0 0 8px 0;
+    font-size: 26px;
+    color: black;
+}
+
+main > a {
+    display: inline-block;
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+main > a:hover {
+    text-decoration: underline;
+}
+
+.idea-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.idea-card {
+    border: 1px solid #e2e5ea;
+    border-radius: 10px;
+    padding: 16px;
+    width: 215px;
+    background-color: white;
+    text-align: center;
+    position: relative;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.idea-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.idea-card h3 {
+    margin: 12px 0 6px 0;
+    font-size: 16px;
+}
+
+.idea-card a {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.idea-card a:hover {
+    color: #4a7bd0;
+}
+
+.idea-card p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.idea-card .star-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.75);   
+    cursor: pointer;
+}
+
+.idea-card .star-btn:hover {
+    color: #ffe28a;
+}
+
+.idea-card .star-btn.starred {
+    color: #ffc107;                    
+}
+
+button {
+    padding: 7px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4a7bd0;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.15s;
+}
+
+button:hover {
+    background-color: #3a63ad;
+}
+
+.interest-btn {
+    padding: 2px 9px;
+    background-color: #f0f2f5;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.interest-btn:hover {
+    background-color: #e0e3e8;
+}
+
+form p {
+    margin: 14px 0;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea,
+form select {
+    padding: 8px 10px;
+    border: 1px solid #ccd1d9;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+form input[type="text"] {
+    width: 280px;
+}
+
+form textarea {
+    width: 320px;
+    height: 110px;
+    resize: vertical;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: #4a7bd0;
+}
+
+.tool-item {
+    border-bottom: 1px solid #e8eaee;
+    padding: 14px 8px;
+    display: flex;
+    align-items: baseline;
+}
+
+.tool-item h3 {
+    margin: 0;
+}
+
+.tool-item a {
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.tool-item a:hover {
+    color: #4a7bd0;
+}
+
+.tool-kind {
+    color: #8a919c;
+    font-size: 13px;
+    margin-left: 14px;
+}
+
+.sort-form {
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+.detail-container {
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.detail-img {
+    width: 100%;
+    max-height: 320px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 10px 0 20px 0;
+}
+
+.detail-info {
+    text-align: left;
+    background-color: #f8f9fb;
+    border: 1px solid #e8eaee;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 25px;
+}
+
+.detail-info p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.detail-info a {
+    color: #4a7bd0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.detail-info a:hover {
+    text-decoration: underline;
+}
+
+.detail-date {
+    color: #999;
+    font-size: 13px;
+}
+
+.detail-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.btn-delete {
+    background-color: #d9534f;
+}
+
+.btn-delete:hover {
+    background-color: #b94743;
+}
+
+.btn-gray {
+    background-color: #7a8291;
+}
+
+.btn-gray:hover {
+    background-color: #626a78;
+}
+
+h1 .star-btn {
+    font-size: 26px;
+    color: #ccc;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: color 0.15s;
+}
+
+h1 .star-btn:hover {
+    color: #ffe28a;
+}
+
+h1 .star-btn.starred {
+    color: #ffc107;
+}
+
+.add-form {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.add-form p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.add-form textarea {
+    width: 100%;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.tool-list {
+    margin-top: 20px;
+}
+
+.tool-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e8eaee;
+    padding: 16px 10px;
+    transition: background-color 0.15s;
+}
+
+.tool-name {
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 16px;
+    width: 110px;             
+    flex-shrink: 0;
+}
+
+.tool-name:hover {
+    color: #4a7bd0;
+}
+
+.tool-kind {
+    color: #555;
+    font-size: 14px;
+    width: 160px;         
+    flex-shrink: 0;
+}
+
+.tool-content {
+    color: #999;
+    font-size: 13px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.info-label {
+    display: inline-block;
+    background-color: #e8eef9;
+    color: #4a7bd0;
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    margin-right: 8px;
+}
+
+.idea-list-title {
+    font-weight: bold;
+}
+
+.empty-text {
+    color: #aaa;
+    font-size: 14px;
+}
