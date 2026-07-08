@@ -1,16 +1,251 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for post in posts %}
-<div class="post-card">
-    <p><strong>{{ post.author.username }}</strong></p>
-    <img src="{{ post.image.url }}" width="400">
-    <p>{{ post.content }}</p>
-    {% if post.author == user %}
-        <a href="{% url 'posts:post_update' post.pk %}">수정</a>
-        <a href="{% url 'posts:post_delete' post.pk %}">삭제</a>
-    {% endif %}
+<style>
+    .main-layout {
+        display: flex;
+        gap: 32px;
+    }
+
+    .feed-col {
+        flex: 1;
+    }
+
+    .side-col {
+        width: 220px;
+    }
+
+    .story-bar {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .story-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        text-align: center;
+        text-decoration: none;
+        color: var(--text-color);
+    }
+
+    .story-add {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 2px solid var(--text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+
+    .story-thumb {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--piro);
+    }
+
+    .sort-form {
+        margin-bottom: 24px;
+    }
+
+    .post-card {
+        margin-bottom: 32px;
+        width: 300px;
+    }
+
+    .post-card img {
+        width: 300px;
+        aspect-ratio: 1;
+        object-fit: cover;
+        display: block;
+    }
+
+    .like-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 0 0 0;
+        font-size: 16px;
+    }
+
+    .my-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .my-info strong {
+        flex: 1;
+    }
+
+    .switch-link {
+        color: var(--btn);
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    .suggest-title {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .suggest-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+        text-decoration: none;
+        color: var(--text-color);
+    }
+
+    .suggest-item strong {
+        font-size: 14px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .avatar-empty {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid var(--text-color);
+    }
+</style>
+
+<div class="main-layout">
+
+    <div class="feed-col">
+        <div class="story-bar">
+            <a href="{% url 'posts:story_create' %}" class="story-item">
+                <div class="story-add">+</div>
+                <small>스토리+</small>
+            </a>
+            {% for story in stories %}
+            <a href="{% url 'posts:story_detail' story.pk %}" class="story-item">
+                {% if story.author.profile_image %}
+                    <img src="{{ story.author.profile_image.url }}" class="story-thumb">
+                {% else %}
+                    <div class="story-thumb" style="border-color:var(--piro);"></div>
+                {% endif %}
+                <small>{{ story.author.username }}</small>
+            </a>
+            {% endfor %}
+        </div>
+
+        <form method="GET" class="sort-form">
+            <strong>게시글 정렬 기준:</strong>
+            <select name="sort">
+                <option value="latest">최신순</option>
+                <option value="like">좋아요</option>
+                <option value="comment">댓글</option>
+            </select>
+            <button type="submit">정렬하기</button>
+        </form>
+
+        {% for post in posts %}
+        <div class="post-card">
+            <a href="{% url 'posts:post_detail' post.pk %}">
+                <img src="{{ post.image.url }}">
+            </a>
+
+            <button class="like-btn" data-pk="{{ post.pk }}">
+                <span class="heart" style="color: {% if user in post.like_users.all %}red{% else %}#333{% endif %};">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-heart-icon lucide-heart">
+                        <path
+                            d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
+                    </svg>
+                </span>
+                <span class="like-count">{{ post.like_users.count }}</span>
+            </button>
+
+            {% if post.author == user %}
+            <a href="{% url 'posts:post_update' post.pk %}">수정</a>
+            <a href="{% url 'posts:post_delete' post.pk %}">삭제</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="side-col">
+        <div class="my-info">
+            {% if user.profile_image %}
+            <img src="{{ user.profile_image.url }}" class="avatar">
+            {% else %}
+            <div class="avatar-empty"></div>
+            {% endif %}
+            <strong>{{ user.username }}</strong>
+            <a href="{% url 'accounts:login' %}" class="switch-link">전환</a>
+        </div>
+
+        <p class="suggest-title">다른 사용자 추천</p>
+        {% for u in suggestions %}
+        <a href="{% url 'accounts:profile' u.username %}" class="suggest-item">
+            {% if u.profile_image %}
+            <img src="{{ u.profile_image.url }}" class="avatar">
+            {% else %}
+            <div class="avatar-empty"></div>
+            {% endif %}
+            <strong>{{ u.username }}</strong>
+        </a>
+        {% endfor %}
+    </div>
 </div>
-{% endfor %}
+
+<script>
+    const likeButtons = document.querySelectorAll('.like-btn');
+
+    likeButtons.forEach(addLikeEvent);
+
+    function addLikeEvent(button) {
+        button.addEventListener('click', function () {
+            toggleLike(button);
+        });
+    }
+
+    function toggleLike(button) {
+        const pk = button.dataset.pk;
+        const url = '/' + pk + '/like/';
+
+        fetch(url)
+            .then(parseJson)
+            .then(function (data) {
+                updateLikeUI(button, data);
+            });
+    }
+
+    function parseJson(response) {
+        return response.json();
+    }
+
+    function updateLikeUI(button, data) {
+        const heart = button.querySelector('.heart');
+        const count = button.querySelector('.like-count');
+
+        if (data.liked) {
+            heart.style.color = 'red';
+        } else {
+            heart.style.color = '#333';
+        }
+        count.textContent = data.count;
+    }
+</script>
 
 {% endblock %}

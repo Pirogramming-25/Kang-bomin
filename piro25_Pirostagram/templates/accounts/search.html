@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>"{{ query }}"로 검색한 결과</h2>
+
+{% for result in results %}
+<div style="display:flex; align-items:center; gap:16px; border:1px solid var(--piro); border-radius:12px; padding:12px; margin:12px 0; max-width:500px;">
+    {% if result.profile_image %}
+        <img src="{{ result.profile_image.url }}" width="48" height="48" style="border-radius:50%; object-fit:cover;">
+    {% else %}
+        <div style="width:48px; height:48px; border-radius:50%; border:2px solid #333;"></div>
+    {% endif %}
+    <a href="{% url 'accounts:profile' result.username %}" style="flex:1;">
+        <strong>{{ result.username }}</strong>
+    </a>
+    <a href="{% url 'accounts:follow' result.username %}"
+       style="padding:4px 12px; border-radius:6px; text-decoration:none; font-size:14px; background:{% if result in user.followings.all %}#ddd; color:#333{% else %}#4A3AFF; color:white{% endif %};">
+        {% if result in user.followings.all %}팔로잉{% else %}팔로우{% endif %}
+    </a>
+</div>
+{% empty %}
+    <p>검색 결과가 없습니다.</p>
+{% endfor %}
+{% endblock %}
