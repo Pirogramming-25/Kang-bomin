@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width:500px; margin:0 auto; text-align:center; background:white; padding:24px; border-radius:12px;">
+    <p><strong>{{ story.author.username }}</strong>의 스토리</p>
+
+    <div style="display:flex; align-items:center; gap:16px; justify-content:center;">
+        <button id="prev" style="font-size:24px; background:none; border:none; cursor:pointer;">&#10094;</button>
+        <img id="story-img" src="" width="300">
+        <button id="next" style="font-size:24px; background:none; border:none; cursor:pointer;">&#10095;</button>
+    </div>
+    <p id="counter"></p>
+    <a href="{% url 'posts:main' %}">✕ 닫기</a>
+</div>
+
+<script>
+const images = [
+    {% for img in story_images %}"{{ img.image.url }}",{% endfor %}
+];
+let idx = 0;
+
+function show(i) {
+    idx = (i + images.length) % images.length;
+    document.getElementById('story-img').src = images[idx];
+    document.getElementById('counter').textContent = (idx + 1) + ' / ' + images.length;
+}
+
+document.getElementById('prev').addEventListener('click', function() { show(idx - 1); });
+document.getElementById('next').addEventListener('click', function() { show(idx + 1); });
+
+show(0);
+</script>
+{% endblock %}

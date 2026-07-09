@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="post-card">
+    <p><strong><a href="{% url 'accounts:profile' post.author.username %}">{{ post.author.username }}</a></strong></p>
+    <img src="{{ post.image.url }}" width="400">
+    <p>{{ post.content }}</p>
+</div>
+
+<h3>댓글 {{ post.comments.count }}개</h3>
+
+{% for comment in post.comments.all %}
+<div class="comment">
+    <strong>{{ comment.author.username }}</strong> {{ comment.content }}
+    {% if comment.author == user %}
+    <a href="{% url 'posts:comment_update' comment.pk %}">수정</a>
+    <a href="{% url 'posts:comment_delete' comment.pk %}">삭제</a>
+    {% endif %}
+</div>
+{% endfor %}
+
+<form action="{% url 'posts:comment_create' post.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="content" placeholder="댓글 달기...">
+    <button type="submit">게시</button>
+</form>
+{% endblock %}
