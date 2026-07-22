@@ -1,0 +1,30 @@
+{% extends "my_gpt/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>AI 고객 피드백 분석 리포트</h1>
+
+<p><strong>사용 모델:</strong> distilbart-cnn-6-6 → roberta-sentiment → toxic-bert (Pipeline Chaining)</p>
+<p><strong>입력 언어:</strong> 영어</p>
+
+<textarea id="combo-input" maxlength="5000" placeholder="영어 고객 리뷰 또는 피드백을 입력해주세요 (200~5,000자)"></textarea>
+
+<button id="combo-btn">복합 분석 실행</button>
+<button id="combo-regenerate-btn" style="display:none;">🔄 재생성</button>
+<p id="combo-loading" style="display:none;">처리 중...</p>
+
+<div id="combo-error" class="error"></div>
+<div id="combo-result"></div>
+
+<h3>최근 실행 기록</h3>
+<ul id="combo-history">
+    {% for h in histories %}
+        <li>{{ h.input_text|truncatechars:30 }} → {{ h.output_text|truncatechars:30 }}</li>
+    {% empty %}
+        <li>기록이 없습니다.</li>
+    {% endfor %}
+</ul>
+
+<script src="{% static 'my_gpt/js/common.js' %}"></script>
+<script src="{% static 'my_gpt/js/combo.js' %}"></script>
+{% endblock %}
