@@ -1,0 +1,5 @@
+# model 파일 추가
+hand_landmarker.task
+
+venv/
+__pycache__/
