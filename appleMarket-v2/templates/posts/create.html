@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>post_create</title>
+<style>
+    main {
+        height: 100vh;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<form id="post-form" action="{% url 'posts:create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">등록하기</button>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const nutritionInput = document.getElementById('id_nutrition_photo');
+
+    const calorieInput = document.getElementById('id_calorie');
+    const carbInput = document.getElementById('id_carbohydrate');
+    const proteinInput = document.getElementById('id_protein');
+    const fatInput = document.getElementById('id_fat');
+
+    const targetInputs = [calorieInput, carbInput, proteinInput, fatInput];
+
+    nutritionInput.addEventListener('change', function () {
+        const file = nutritionInput.files[0];
+        if (!file) return;
+
+        targetInputs.forEach(input => {
+            input.value = '';
+            input.placeholder = '분석 중...';
+            input.disabled = true;
+        });
+
+        const formData = new FormData();
+        formData.append('nutrition_photo', file);
+
+        fetch("{% url 'posts:analyze_nutrition' %}", {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            calorieInput.value = data.calorie ?? '';
+            carbInput.value = data.carbohydrate ?? '';
+            proteinInput.value = data.protein ?? '';
+            fatInput.value = data.fat ?? '';
+
+            targetInputs.forEach(input => {
+                input.disabled = false;
+                input.placeholder = input.value ? '' : '자동 인식 실패 - 직접 입력해주세요';
+            });
+        })
+        .catch(error => {
+            console.error('OCR 분석 실패:', error);
+            targetInputs.forEach(input => {
+                input.disabled = false;
+                input.placeholder = '자동 인식 실패 - 직접 입력해주세요';
+            });
+        });
+    });
+});
+</script>
+{% endblock %}
