@@ -1,0 +1,271 @@
+@import "./nomalize.css";
+
+:root {
+    --apple-red: #ff5a5f;
+    --apple-red-dark: #e14448;
+    --apple-green: #6fcf5b;
+    --apple-green-dark: #4caf50;
+    --leaf-green: #7ed957;
+    --bg-color: #fff8f0;
+    --card-bg: #ffffff;
+    --text-color: #4a3f35;
+    --border-color: #ffe3d6;
+}
+
+body {
+    justify-content: center;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    background-color: var(--bg-color);
+    background-image:
+        radial-gradient(circle at 10% 20%, #ffe9e0 0%, transparent 25%),
+        radial-gradient(circle at 90% 80%, #eaf7e3 0%, transparent 25%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+    color: var(--text-color);
+}
+
+main {
+    background-color: var(--card-bg);
+    width: 768px;
+    padding: 1.5rem;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(255, 90, 95, 0.1);
+    margin: 24px 0;
+    border: 3px solid #fff0ea;
+}
+
+footer {
+    display: flex;
+    justify-content: right;
+    background-color: var(--card-bg);
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.search-box {
+    display: grid;
+    grid-template-columns: 1fr 0.15fr;
+    margin-bottom: 14px;
+}
+
+.search-box>form {
+    display: flex;
+}
+
+.content-wrapper {
+    padding: 10px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+    padding: 14px;
+    border-radius: 18px;
+    background-color: #fffdfb;
+    border: 2px solid var(--border-color);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.item:hover {
+    transform: translateY(-3px) rotate(-0.3deg);
+    box-shadow: 0 6px 16px rgba(255, 90, 95, 0.15);
+    border-color: var(--apple-red);
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 3px solid #fff;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.info * {
+    margin: 5px;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding-bottom: 5px;
+    color: var(--text-color);
+}
+
+.title:hover {
+    color: var(--apple-red);
+}
+
+.title::before {
+    content: "🍎 ";
+}
+
+.region,
+.price,
+.create-date {
+    color: #9a8b7f;
+    font-size: 0.95rem;
+}
+
+.price {
+    font-weight: 700;
+    color: var(--apple-green-dark);
+}
+
+#logo h1 {
+    margin: 20px 0;
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
+}
+
+#logo {
+    display: flex;
+    justify-content: center;
+}
+
+.form-control {
+    margin-right: 10px;
+    border-radius: 14px;
+    border: 2px solid var(--border-color);
+    padding: 9px 14px;
+}
+
+.form-control:focus {
+    border-color: var(--apple-red);
+    box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.15);
+    outline: none;
+}
+
+.related-post {
+    margin-bottom: 10px;
+}
+
+/* 버튼 - 사과 톤으로 */
+.btn {
+    border-radius: 999px;
+    font-weight: 600;
+    border: none;
+}
+
+.btn-success {
+    background-color: var(--apple-green);
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: var(--apple-green-dark);
+}
+
+.btn-primary {
+    background-color: #6fb7ff;
+}
+
+.btn-secondary {
+    background-color: var(--apple-red);
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: var(--apple-red-dark);
+}
+
+.btn-danger {
+    background-color: #ff8787;
+}
+
+.btn-info,
+.btn-warning {
+    border-radius: 999px;
+}
+
+.btn-success,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-info,
+.btn-warning {
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.btn-success:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-danger:hover,
+.btn-info:hover,
+.btn-warning:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+form p {
+    margin: 16px 0;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: var(--apple-green-dark);
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="file"] {
+    width: 100%;
+    padding: 9px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 14px;
+    box-sizing: border-box;
+    background-color: #fffdfb;
+}
+
+form input:focus {
+    border-color: var(--apple-red);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.15);
+}
+
+form input:disabled {
+    background-color: #fef4ee;
+    color: #c9a898;
+}
+
+h3 {
+    color: var(--apple-red);
+}
+
+.table {
+    border-radius: 14px;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+}
+
+.table th {
+    background-color: #eaf7e3;
+    color: var(--apple-green-dark);
+    width: 40%;
+    font-weight: 700;
+}
+
+.table td {
+    background-color: #fffdfb;
+}
+
+hr {
+    border: none;
+    border-top: 2px dashed var(--border-color);
+    margin: 22px 0;
+}
+
+h1[style] {
+    text-shadow: 1px 1px 0 #fff0ea;
+}
